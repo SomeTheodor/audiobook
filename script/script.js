@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    let currentAudioPlayer = null; // Variable global para el reproductor de audio actual
+
     document.querySelectorAll('.audio-container').forEach(container => {
         const audioPlayer = container.querySelector('.audio-player');
         const playPauseButton = container.querySelector('.play-pause');
@@ -11,7 +13,11 @@ document.addEventListener('DOMContentLoaded', function () {
         // Play/Pause functionality
         playPauseButton.addEventListener('click', function () {
             if (audioPlayer.paused) {
+                if (currentAudioPlayer && currentAudioPlayer !== audioPlayer) {
+                    currentAudioPlayer.pause(); // Pausar el reproductor de audio anterior
+                }
                 audioPlayer.play();
+                currentAudioPlayer = audioPlayer; // Actualizar el reproductor de audio actual
             } else {
                 audioPlayer.pause();
             }
@@ -70,5 +76,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
 
   
